@@ -37,6 +37,7 @@ class TopicListView(HtmxListView):
     model = Topic
     template_name = 'blog/topics.html'
     partial_template_name = 'blog/partials/topic_results.html'
+    context_object_name = 'topics'
 
     def get_queryset(self):
         self.query = self.request.GET.get('q', '').strip()
@@ -87,6 +88,7 @@ class PostListView(HtmxListView):
     queryset = BlogPost.objects.select_related('author', 'topic')
     template_name = 'blog/posts.html'
     partial_template_name = 'blog/partials/post_results.html'
+    context_object_name = 'posts'
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
