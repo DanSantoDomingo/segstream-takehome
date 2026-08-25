@@ -1,0 +1,23 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% block title %}Segstream Blog{% endblock %}</title>
+  <link rel="stylesheet" href="{% static 'blog/styles.css' %}">
+  <script defer src="https://unpkg.com/htmx.org@2.0.4/dist/htmx.min.js"></script>
+</head>
+<body>
+  <header class="site-header">
+    <a class="brand" href="{% url 'blog:topic-list' %}">Segstream Blog</a>
+    <nav aria-label="Primary navigation">
+      <a href="{% url 'blog:topic-list' %}">Topics</a>
+      <a href="{% url 'blog:post-list' %}">Posts</a>
+    </nav>
+  </header>
+  <main class="container">
+    {% block content %}{% endblock %}
+  </main>
+</body>
+</html>

@@ -1,0 +1,33 @@
+{% if object_list %}
+  <div class="post-list">
+    {% for post in object_list %}
+      <article class="card post-card">
+        <header>
+          <p class="eyebrow">{{ post.topic.title }}</p>
+          <h2>{{ post.title }}</h2>
+          <p class="byline">
+            By {{ post.author.name }}, age {{ post.author.age }} ·
+            <time datetime="{{ post.publication_date|date:'c' }}">{{ post.publication_date|date:'F j, Y, g:i a' }}</time>
+          </p>
+        </header>
+        <div class="post-content">{{ post.content|linebreaks }}</div>
+        <footer>
+          <strong>Other topics by {{ post.author.name }}</strong>
+          {% if post.other_topics %}
+            <ul class="tag-list" aria-label="Other topics">
+              {% for topic in post.other_topics %}<li>{{ topic.title }}</li>{% endfor %}
+            </ul>
+          {% else %}
+            <p class="muted">No other topics yet.</p>
+          {% endif %}
+        </footer>
+      </article>
+    {% endfor %}
+  </div>
+  {% include 'blog/partials/pagination.html' with target='#post-results' %}
+{% else %}
+  <div class="empty-state">
+    <h2>No posts yet</h2>
+    <p>Published posts will appear here.</p>
+  </div>
+{% endif %}

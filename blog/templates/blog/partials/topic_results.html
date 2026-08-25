@@ -1,0 +1,28 @@
+{% if object_list %}
+  <div class="card-grid">
+    {% for topic in object_list %}
+      <article class="card topic-card">
+        <h2>{{ topic.title }}</h2>
+        <h3>Top authors</h3>
+        {% if topic.top_authors %}
+          <ol class="author-list">
+            {% for author in topic.top_authors %}
+              <li>
+                <span>{{ author.name }}</span>
+                <span class="count">{{ author.post_count }} post{{ author.post_count|pluralize }}</span>
+              </li>
+            {% endfor %}
+          </ol>
+        {% else %}
+          <p class="muted">No posts in this topic yet.</p>
+        {% endif %}
+      </article>
+    {% endfor %}
+  </div>
+  {% include 'blog/partials/pagination.html' with target='#topic-results' query=q %}
+{% else %}
+  <div class="empty-state">
+    <h2>No topics found</h2>
+    <p>{% if q %}Try a different search phrase.{% else %}Topics will appear here when they are added.{% endif %}</p>
+  </div>
+{% endif %}

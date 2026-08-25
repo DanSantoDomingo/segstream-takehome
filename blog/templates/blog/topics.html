@@ -1,0 +1,35 @@
+{% extends 'blog/base.html' %}
+
+{% block title %}Topics · Segstream Blog{% endblock %}
+
+{% block content %}
+  <div class="page-heading">
+    <div>
+      <h1>Topics</h1>
+    </div>
+    <form
+      class="search"
+      action="{% url 'blog:topic-list' %}"
+      method="get"
+      hx-get="{% url 'blog:topic-list' %}"
+      hx-target="#topic-results"
+      hx-push-url="true"
+      hx-trigger="input changed delay:300ms from:input"
+    >
+      <label for="topic-search">Search topics</label>
+      <input
+        id="topic-search"
+        type="search"
+        name="q"
+        value="{{ q }}"
+        placeholder="Try Django or testing"
+        autocomplete="off"
+      >
+      <button type="submit">Search</button>
+    </form>
+  </div>
+
+  <section id="topic-results" aria-live="polite" aria-label="Topic results">
+    {% include 'blog/partials/topic_results.html' %}
+  </section>
+{% endblock %}

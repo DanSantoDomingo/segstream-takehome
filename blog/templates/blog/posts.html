@@ -1,0 +1,15 @@
+{% extends 'blog/base.html' %}
+
+{% block title %}Posts · Segstream Blog{% endblock %}
+
+{% block content %}
+  <div class="page-heading">
+    <div>
+      <h1>Blog posts</h1>
+    </div>
+  </div>
+
+  <section id="post-results" aria-live="polite" aria-label="Post results">
+    {% include 'blog/partials/post_results.html' %}
+  </section>
+{% endblock %}
